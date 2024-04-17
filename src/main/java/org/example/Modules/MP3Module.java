@@ -14,8 +14,8 @@ import java.io.IOException;
 
 @Component
 public class MP3Module implements Module{
-    private String firstDescription = "Вывод названия трека из тегов";
-    private String secondDescription = "Вывод длительности в секундах";
+    private final String firstDescription = "Вывод названия трека из тегов";
+    private final String secondDescription = "Вывод длительности в секундах";
     @Override
     public boolean isRightFormat(String path) {
         return path.endsWith(".mp3");
@@ -23,13 +23,15 @@ public class MP3Module implements Module{
 
     @Override
     public void description(String path) {
+        System.out.println("Работа с аудио файлами:");
+        System.out.println("0 - Выход");
         System.out.println("1 - " + firstDescription);
         System.out.println("2 - " + secondDescription);
     }
 
     @Override
     public void firstFunction(String path) throws InvalidDataException, UnsupportedTagException, IOException {
-        System.out.println(firstDescription + ":\n");
+        System.out.println("\n"+firstDescription + ":");
         Mp3File mp3file = new Mp3File(new File(path));
         if (mp3file.hasId3v1Tag()) {
             ID3v1 id3v1Tag = mp3file.getId3v1Tag();
@@ -38,9 +40,13 @@ public class MP3Module implements Module{
     }
 
     @Override
-    public void secondFunction(String path) {
-        System.out.println(secondDescription + ":\n");
-
+    public void secondFunction(String path) throws InvalidDataException, UnsupportedTagException, IOException {
+        System.out.println("\n"+secondDescription + ":");
+        Mp3File mp3file = new Mp3File(new File(path));
+        if (mp3file.hasId3v1Tag()) {
+            long count = mp3file.getLength();
+            System.out.println("Название трека : " + count);
+        }
     }
 
     @Override

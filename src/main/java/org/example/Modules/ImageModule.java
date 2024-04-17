@@ -14,32 +14,34 @@ import java.io.InputStream;
 
 @Component
 public class ImageModule implements Module{
-    private String firstDescription = "Вывод размера изображения";
-    private String secondDescription = "Вывод информации exif ";
+    private final String firstDescription = "Вывод размера изображения";
+    private final String secondDescription = "Вывод информации exif ";
     @Override
     public boolean isRightFormat(String path) {
-        return path.endsWith(".png");
+        return path.endsWith(".png") || path.endsWith(".jpeg") || path.endsWith(".jpg") ;
     }
 
     @Override
     public void description(String path) {
+        System.out.println("Работа с изображениями:");
+        System.out.println("0 - Выход");
         System.out.println("1 - " + firstDescription);
         System.out.println("2 - " + secondDescription);
     }
 
     @Override
     public void firstFunction(String path) throws IOException {
-        System.out.println(firstDescription + ":\n");
+        System.out.println("\n"+firstDescription + ":");
         BufferedImage image = ImageIO.read(new File(path));
         int height = image.getHeight();
         int width = image.getWidth();
-        System.out.println("Высота изображения: " + height +
-                "\nШирина изображения: " + width);
+        System.out.println("Высота изображения: " + height + "px" +
+                "\nШирина изображения: " + width + "px");
     }
 
     @Override
     public void secondFunction(String path) {
-        System.out.println(secondDescription + ":\n");
+        System.out.println("\n"+secondDescription + ":");
         try(InputStream inputStream = new FileInputStream(path)) {
 
             Metadata metadata = ImageMetadataReader.readMetadata(inputStream);

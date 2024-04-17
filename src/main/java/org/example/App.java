@@ -1,4 +1,6 @@
 package org.example;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import org.example.Modules.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +19,7 @@ public class App {
         this.moduls = moduls;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidDataException, UnsupportedTagException {
         SpringApplication.run(App.class, args);
         while (true){
             System.out.println("Введите путь к файлу\n(для завершения работы введите 0)");
@@ -36,7 +38,7 @@ public class App {
         }
     }
 
-    private static void startModule(Module module, String path) throws IOException {
+    private static void startModule(Module module, String path) throws IOException, InvalidDataException, UnsupportedTagException {
         Scanner scanner = new Scanner(System.in);
         if(module != null){
             while (true){
@@ -47,10 +49,13 @@ public class App {
                         return;
                     case "1":
                         module.firstFunction(path);
+                        break;
                     case "2":
-                        module.thirdFunction(path);
+                        module.secondFunction(path);
+                        break;
                     case "3":
                         module.thirdFunction(path);
+                        break;
                     default:
                         System.out.println("Выберите из предложенного списка");
                         break;
