@@ -10,5 +10,5 @@ public interface Module {
     void description(String path);
     void firstFunction(String path) throws IOException, InvalidDataException, UnsupportedTagException;
     void secondFunction(String path) throws InvalidDataException, UnsupportedTagException, IOException;
-    void thirdFunction(String path);
+    void thirdFunction(String path) throws IOException, InvalidDataException, UnsupportedTagException;
 }

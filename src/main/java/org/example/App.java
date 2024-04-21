@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class App {
+
     private static List<Module> moduls;
     @Autowired
     public App(List<Module> moduls){

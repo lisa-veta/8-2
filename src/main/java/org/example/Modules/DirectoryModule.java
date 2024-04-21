@@ -10,6 +10,7 @@ import java.io.FileReader;
 public class DirectoryModule implements Module{
     private final String firstDescription = "Вывод списка файлов в каталоге";
     private final String secondDescription = "Подсчет размера всех файлов в каталоге";
+    private final String thirdDescription = "Подсчет количество папок и файлов";
     @Override
     public boolean isRightFormat(String path) {
         File folder = new File(path);
@@ -18,17 +19,18 @@ public class DirectoryModule implements Module{
 
     @Override
     public void description(String path) {
-        System.out.println("Работа с папками:");
+        System.out.println("\nРабота с папками:");
         System.out.println("0 - Выход");
         System.out.println("1 - " + firstDescription);
         System.out.println("2 - " + secondDescription);
+        System.out.println("3 - " + thirdDescription);
     }
 
     @Override
     public void firstFunction(String path) {
         System.out.println("\n"+firstDescription + ":");
         File folder = new File(path);
-        File[] files = folder.listFiles(File::isFile);
+        File[] files = folder.listFiles();
         if(files != null){
             for(File file : files){
                 System.out.println(file.getName()+"\n");
@@ -43,7 +45,7 @@ public class DirectoryModule implements Module{
     public void secondFunction(String path) {
         System.out.println("\n"+secondDescription + ":");
         File folder = new File(path);
-        File[] files = folder.listFiles(File::isFile);
+        File[] files = folder.listFiles();
         long count = 0;
         if(files != null){
             for(File file : files){
@@ -60,6 +62,15 @@ public class DirectoryModule implements Module{
 
     @Override
     public void thirdFunction(String path) {
-
+        System.out.println("\n"+thirdDescription + ":");
+        File folder = new File(path);
+        File[] files = folder.listFiles(File::isFile);
+        File[] folders = folder.listFiles(File::isDirectory);
+        if(files != null){
+            System.out.println("Количество файлов : " + files.length);
+        }
+        if(folders != null){
+            System.out.println("Количество папок : " + folders.length);
+        }
     }
 }
