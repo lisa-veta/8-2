@@ -15,7 +15,8 @@ public class TextModule implements Module{
     private final String thirdDescription = "Подсчет и вывод количества слов";
     @Override
     public boolean isRightFormat(String path) {
-        return path.endsWith(".txt") || path.endsWith(".docx");
+        File file = new File(path);
+        return (path.endsWith(".txt") || path.endsWith(".docx")) && file.isFile();
     }
 
     @Override

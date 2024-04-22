@@ -4,9 +4,7 @@ import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import net.bramp.ffmpeg.FFprobe;
-import net.bramp.ffmpeg.probe.FFmpegFormat;
-import net.bramp.ffmpeg.probe.FFmpegProbeResult;
+
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -19,7 +17,8 @@ public class MP3Module implements Module{
     private final String thirdDescription = "Вывод год создания, автора и жанра";
     @Override
     public boolean isRightFormat(String path) {
-        return path.endsWith(".mp3");
+        File file = new File(path);
+        return path.endsWith(".mp3")&& file.isFile();
     }
 
     @Override

@@ -19,7 +19,8 @@ public class ImageModule implements Module{
     private final String thirdDescription = "Вывод ориентации изображения";
     @Override
     public boolean isRightFormat(String path) {
-        return path.endsWith(".png") || path.endsWith(".jpeg") || path.endsWith(".jpg") ;
+        File file = new File(path);
+        return (path.endsWith(".png") || path.endsWith(".jpeg") || path.endsWith(".jpg"))&& file.isFile();
     }
 
     @Override
